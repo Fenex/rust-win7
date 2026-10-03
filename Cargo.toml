@@ -96,4 +96,6 @@ codegen-units = 1
 dirs-sys = { path = "src/tools/win7/dirs-sys" }
 # windows-sys 0.61 links CoTaskMemFree from combase.dll. This copy links it from ole32.dll.
 windows-sys = { path = "src/tools/win7/windows-sys" }
+# windows-result 0.3.4 imports RoOriginateErrorW from a Windows 8 API set.
+windows-result = { path = "src/tools/win7/windows-result" }
 
