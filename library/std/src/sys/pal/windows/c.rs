@@ -109,6 +109,13 @@ unsafe extern "system" {
     pub fn ProcessPrng(pbdata: *mut u8, cbdata: usize) -> BOOL;
 }
 
+// `GetHostNameW` is only available starting with Windows 8. Declare it for
+// every vendor except `win7`, which uses ANSI `gethostname` (present since Vista).
+#[cfg(not(target_vendor = "win7"))]
+windows_targets::link!("ws2_32.dll" "system" fn GetHostNameW(name: PWSTR, namelen: i32) -> i32);
+#[cfg(target_vendor = "win7")]
+windows_targets::link!("ws2_32.dll" "system" fn gethostname(name: PSTR, namelen: i32) -> i32);
+
 windows_targets::link!("ntdll.dll" "system" fn NtCreateNamedPipeFile(
     filehandle: *mut HANDLE,
     desiredaccess: FILE_ACCESS_RIGHTS,
