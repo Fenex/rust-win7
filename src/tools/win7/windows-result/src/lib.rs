@@ -2,6 +2,9 @@
 #![debugger_visualizer(natvis_file = "../windows-result.natvis")]
 #![cfg_attr(all(not(feature = "std"), not(test)), no_std)]
 #![cfg_attr(not(windows), allow(unused_imports))]
+// Path dependencies are built with `-D warnings`. These items are `pub` inside
+// private modules and are not part of the crate's external API.
+#![allow(unreachable_pub)]
 
 extern crate alloc;
 
