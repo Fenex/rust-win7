@@ -238,9 +238,12 @@ cfg_select! {
     _ => {}
 }
 
-// Only available starting with Windows 8.
+// `GetHostNameW` is only available starting with Windows 8. The Windows 7
+// target uses ANSI `gethostname`, which has been in `ws2_32.dll` since Vista.
 #[cfg(not(target_vendor = "win7"))]
 windows_link::link!("ws2_32.dll" "system" fn GetHostNameW(name : PWSTR, namelen : i32) -> i32);
+#[cfg(target_vendor = "win7")]
+windows_link::link!("ws2_32.dll" "system" fn gethostname(name : PSTR, namelen : i32) -> i32);
 
 unsafe extern "C" {
     pub fn atexit(cb: unsafe extern "C" fn()) -> c_int;
