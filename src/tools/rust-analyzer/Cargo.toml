@@ -35,6 +35,8 @@ inherits = "release"
 debug = 2
 
 [patch.'crates-io']
+dirs-sys = { path = "../win7-dirs-sys" }
+
 # rowan = { path = "../rowan" }
 
 # line-index = { path = "lib/line-index" }
