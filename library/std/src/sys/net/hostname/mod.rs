@@ -3,8 +3,8 @@ cfg_select! {
         mod unix;
         pub use unix::hostname;
     }
-    // `GetHostNameW` is only available starting with Windows 8.
-    all(target_os = "windows", not(target_vendor = "win7")) => {
+    // Windows 8+ uses `GetHostNameW`. The Windows 7 target uses ANSI `gethostname`.
+    target_os = "windows" => {
         mod windows;
         pub use windows::hostname;
     }
