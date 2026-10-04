@@ -16,7 +16,7 @@ impl WeakRefCount {
 
     pub fn add_ref(&self) -> u32 {
         self.0
-            .fetch_update(Ordering::Relaxed, Ordering::Relaxed, |count_or_pointer| {
+            .try_update(Ordering::Relaxed, Ordering::Relaxed, |count_or_pointer| {
                 bool::then_some(!is_weak_ref(count_or_pointer), count_or_pointer + 1)
             })
             .map(|u| u as u32 + 1)
@@ -30,7 +30,7 @@ impl WeakRefCount {
 
     pub fn release(&self) -> u32 {
         self.0
-            .fetch_update(Ordering::Release, Ordering::Relaxed, |count_or_pointer| {
+            .try_update(Ordering::Release, Ordering::Relaxed, |count_or_pointer| {
                 bool::then_some(!is_weak_ref(count_or_pointer), count_or_pointer - 1)
             })
             .map(|u| u as u32 - 1)
@@ -305,7 +305,7 @@ impl TearOff {
 
             this.strong_count
                 .0
-                .fetch_update(Ordering::Acquire, Ordering::Relaxed, |count| {
+                .try_update(Ordering::Acquire, Ordering::Relaxed, |count| {
                     // Attempt to acquire a strong reference count to stabilize the object for the duration
                     // of the `QueryInterface` call.
                     bool::then_some(count != 0, count + 1)
