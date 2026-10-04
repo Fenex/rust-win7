@@ -38,6 +38,8 @@ debug = 2
 dirs-sys = { path = "../win7/dirs-sys" }
 # windows-sys 0.61 links CoTaskMemFree from combase.dll. This copy links it from ole32.dll.
 windows-sys = { path = "../win7/windows-sys" }
+# windows-core 0.62 does the same for CoTaskMemAlloc/Free.
+windows-core = { path = "../win7/windows-core-0.62.2" }
 # windows-result 0.4.1 imports RoOriginateErrorW from a Windows 8 API set.
 windows-result = { path = "../win7/windows-result-0.4.1" }
 
