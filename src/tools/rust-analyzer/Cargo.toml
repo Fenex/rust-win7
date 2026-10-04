@@ -36,8 +36,10 @@ debug = 2
 
 [patch.'crates-io']
 dirs-sys = { path = "../win7/dirs-sys" }
-# windows-result 0.3.4 imports RoOriginateErrorW from a Windows 8 API set.
-windows-result = { path = "../win7/windows-result-0.3.4" }
+# windows-sys 0.61 links CoTaskMemFree from combase.dll. This copy links it from ole32.dll.
+windows-sys = { path = "../win7/windows-sys" }
+# windows-result 0.4.1 imports RoOriginateErrorW from a Windows 8 API set.
+windows-result = { path = "../win7/windows-result-0.4.1" }
 
 # rowan = { path = "../rowan" }
 
