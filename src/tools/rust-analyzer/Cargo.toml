@@ -37,7 +37,7 @@ debug = 2
 [patch.'crates-io']
 dirs-sys = { path = "../win7/dirs-sys" }
 # windows-result 0.3.4 imports RoOriginateErrorW from a Windows 8 API set.
-windows-result = { path = "../win7/windows-result" }
+windows-result = { path = "../win7/windows-result-0.3.4" }
 
 # rowan = { path = "../rowan" }
 
