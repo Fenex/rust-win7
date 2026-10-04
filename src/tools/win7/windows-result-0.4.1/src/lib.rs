@@ -15,7 +15,7 @@
 
 extern crate alloc;
 
-use alloc::{string::String, vec::Vec};
+use alloc::string::String;
 
 mod bindings;
 use bindings::*;
